@@ -32,7 +32,6 @@ function createAccount(){
             <td>${account.email}</td>
             <td>${account.phone}</td>
         </tr>
-       
        `
     }
     accountsData.innerHTML = htmlAccount;
