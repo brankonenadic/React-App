@@ -1,4 +1,5 @@
 'use strict';
+window.addEventListener('beforeunload', save);
 let accountsData = document.querySelector('#accounts-data');
 let allLink = document.querySelectorAll('.nav-link');
 let addAcount = document.querySelector('#add-account');
@@ -10,8 +11,30 @@ let lastnameInput = document.querySelector('[placeholder="last-name"]');
 let emailInput = document.querySelector('[placeholder="email"]');
 let phoneInput = document.querySelector('[placeholder="phone"]');
 let saveBtn = document.querySelector('#save');
+let eId = document.querySelector('.eId');
+let eFirstname = document.querySelector('.eFirstname');
+let eLastname = document.querySelector('.eLastname');
+let eEmail = document.querySelector('.eEmail');
+let ePhone = document.querySelector('.ePhone');
+let editBtn = document.querySelector('#edit');
+let id;
+
 
 saveBtn.addEventListener('click', saveAccount);
+editBtn.addEventListener('click', saveEditAccount);
+
+function saveEditAccount() {
+  const editAccount = {
+    id: eId.value,
+    firstName: eFirstname.value,
+    lastName: eLastname.value,
+    email: eEmail.value,
+    phone: ePhone.value
+  }
+  db[id] = editAccount;
+  createAccount();
+  showView('#accounts');
+}
 
 
 function saveAccount() {
@@ -63,8 +86,39 @@ function createAccount(){
             <td>${account.lastName}</td>
             <td>${account.email}</td>
             <td>${account.phone}</td>
+            <td><button data-id="${i}" class="edit btn btn-sm btn-warning form-control">Edit</button></td>
+            <td><button data-id="${i}" class="delete btn btn-sm btn-danger form-control">Delete</button></td>
         </tr>
        `
     }
     accountsData.innerHTML = htmlAccount;
+    let allDeleteBtn = document.querySelectorAll('.delete');
+    let allEditBtn = document.querySelectorAll('.edit');
+    for (let i = 0; i < allDeleteBtn.length; i++) {
+      allDeleteBtn[i].addEventListener('click', deleteAccount);
+      allEditBtn[i].addEventListener('click', editAccount);
+    }
+}
+
+function deleteAccount(){
+let id = this.getAttribute('data-id');
+db.splice(id,1);
+createAccount();
+showView('#accounts');
+}
+
+function editAccount(){
+  id = this.getAttribute('data-id');
+  let selectedAccount = db[id];
+ 
+  eId.value = selectedAccount.id;
+  eFirstname.value = selectedAccount.firstName;
+  eLastname.value = selectedAccount.lastName;
+  eEmail.value = selectedAccount.email;
+  ePhone.value = selectedAccount.phone;
+  showView('#edit-account');
+}
+
+function save() {
+  localStorage.db = JSON.stringify(db);
 }
