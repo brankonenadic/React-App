@@ -27,9 +27,10 @@
 .control input {
   flex: 3;
   font: inherit;
-  padding: 0.35rem 0.35rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 18px;
+  border: 2px solid #ccc;
+  margin-bottom: 0.5rem;
 }
 
 .control input:focus {
