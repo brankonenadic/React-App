@@ -1,44 +1,38 @@
-import React, {useState} from 'react'
+import {useCallback, useState} from 'react'
 
-const useHttp = (requestConfing) => {
+const useHttp = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
   
   
-    const sendRequest = async (taskText) => {
+    const sendRequest = useCallback( async (requestConfing, applayData) => {
       setIsLoading(true);
       setError(null);
       try {
         const response = await fetch(
-          requestConfing.url
-        );
-  
+          requestConfing.url, {
+            method: requestConfing.method ? requestConfing.method : 'GET',
+            headers: requestConfing.headers ? requestConfing.method : {},
+            body: requestConfing.body ? JSON.stringify(requestConfing.body) : null,
+          });
         if (!response.ok) {
           throw new Error('Request failed!');
         }
   
         const data = await response.json();
-  
-        const loadedTasks = [];
-  
-        for (const taskKey in data) {
-          loadedTasks.push({ id: taskKey, text: data[taskKey].text });
-        }
-  
-        setTasks(loadedTasks);
+        applayData(data);
+ 
       } catch (err) {
         setError(err.message || 'Something went wrong!');
       }
       setIsLoading(false);
-    };
-  
-    useEffect(() => {
-      fetchTasks();
     }, []);
-  
-    const taskAddHandler = (task) => {
-      setTasks((prevTasks) => prevTasks.concat(task));
-    };
+
+  return {
+    isLoading,
+    error,
+    sendRequest
+  };
 }
 
 export default useHttp
