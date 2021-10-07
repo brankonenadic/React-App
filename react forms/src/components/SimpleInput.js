@@ -61,13 +61,13 @@ const SimpleInput = (props) => {
                 <input type='text' id='name' onChange={enteredNameInputHandler}
                 onBlur={nameInputBlurHandler} value={enteredNameInput} />
             </div>
-            {nameInputIsValid && <p className='error-text'>Enter Your Name !!!</p>}
+            {nameInputIsValid && <p className='error-text'>Enter Valid Name !!!</p>}
             <div className={inputEmailClass}>
                 <label htmlFor='email'>Your Email</label>
-                <input type='text' id='email' onChange={enteredEmailInputHandler}
+                <input type='email' id='email' onChange={enteredEmailInputHandler}
                 onBlur={emailInputBlurHandler} value={enteredEmailInput} />
             </div>
-            {emailInputIsValid && <p className='error-text'>Enter Your Email !!!</p>}
+            {emailInputIsValid && <p className='error-text'>Enter Valid Email !!!</p>}
             <div className="form-actions">
                 <button disabled={!formIsValid}>Submit</button>
             </div>
