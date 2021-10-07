@@ -1,24 +1,101 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
+
+const SimpleInput = (props) => {
+
+    const [enteredNameInput, setEnteredNameInput] = useState('');
+    const [enteredEmailInput, setEnteredEmailInput] = useState('');
+    const [inputNameTuched, setInputNameTuched] = useState(false);
+    const [inputEmailTuched, setInputEmailTuched] = useState(false);
+
+    const enteredNameIsValid = enteredNameInput.trim() !== '';
+    const enteredEmailIsValid = enteredEmailInput.trim() !== '';
+    const nameInputIsValid = !enteredNameIsValid && inputNameTuched;
+    const emailInputIsValid = !enteredEmailIsValid && inputEmailTuched;
+
+    let formIsValid = false;
+
+    if (enteredNameIsValid && enteredEmailIsValid) {
+        formIsValid = true;
+    }
+
+    const enteredNameInputHandler = (e) => {
+        setEnteredNameInput(e.target.value);
+        
+    }
+    const enteredEmailInputHandler = (e) => {
+        setEnteredEmailInput(e.target.value);
+        
+    }
+    const nameInputBlurHandler = () => {
+        setInputNameTuched(true);
+    }
+    const emailInputBlurHandler = () => {
+        setInputEmailTuched(true);
+    }
+    const formSubmitHandler = (e) => {
+        e.preventDefault();
+        setInputNameTuched(true);
+        setInputEmailTuched(true);
+        if (!enteredNameIsValid && !enteredEmailIsValid) {
+            formIsValid = false;
+
+        }
+    
+        console.log(enteredNameInput);
+        console.log(enteredEmailInput);
+        setEnteredNameInput('');
+        setEnteredEmailInput('');
+        setInputNameTuched(false);
+        setInputEmailTuched(false);
+    }
+    const inputNameClass = !nameInputIsValid ? 'form-control' : 'form-control invalid';
+    const inputEmailClass = !emailInputIsValid ? 'form-control' : 'form-control invalid';
+    return (
+        <form onSubmit={formSubmitHandler}>
+            <div className={inputNameClass}>
+                <label htmlFor='name'>Your Name</label>
+                <input type='text' id='name' onChange={enteredNameInputHandler}
+                onBlur={nameInputBlurHandler} value={enteredNameInput} />
+            </div>
+            {nameInputIsValid && <p className='error-text'>Enter Your Name !!!</p>}
+            <div className={inputEmailClass}>
+                <label htmlFor='email'>Your Email</label>
+                <input type='text' id='email' onChange={enteredEmailInputHandler}
+                onBlur={emailInputBlurHandler} value={enteredEmailInput} />
+            </div>
+            {emailInputIsValid && <p className='error-text'>Enter Your Email !!!</p>}
+            <div className="form-actions">
+                <button disabled={!formIsValid}>Submit</button>
+            </div>
+        </form>
+    );
+};
+
+export default SimpleInput;
+
+
+
+/* import { useRef, useState } from 'react'
 
 const SimpleInput = (props) => {
     const inputRef = useRef();
-    const [enteredInput, setEnteredInput] = useState('');
+    const [enteredNameInput, setEnteredNameInput] = useState('');
     const [inputIsValid, setInputIsValid] = useState(true);
 
-    const enteredInputHandler = (e) => {
-        setEnteredInput(e.target.value);
+    const enteredNameInputHandler = (e) => {
+        setEnteredNameInput(e.target.value);
         setInputIsValid(true);
     }
     const formSubmitHandler = (e) => {
         e.preventDefault();
-        if (enteredInput.trim() === '') {
+        if (enteredNameInput.trim() === '') {
             setInputIsValid(false);
             return;
         }
         setInputIsValid(true);
-        console.log(enteredInput);
+        console.log(enteredNameInput);
         console.log(inputRef.current.value);
-        setEnteredInput('');
+        setEnteredNameInput('');
 
     }
     const inputClass = inputIsValid ? 'form-control' : 'form-control invalid';
@@ -26,7 +103,7 @@ const SimpleInput = (props) => {
         <form onSubmit={formSubmitHandler}>
             <div className={inputClass}>
                 <label htmlFor='name'>Your Name</label>
-                <input ref={inputRef} type='text' id='name' onChange={enteredInputHandler} value={enteredInput} />
+                <input ref={inputRef} type='text' id='name' onChange={enteredNameInputHandler} value={enteredNameInput} />
             </div>
             {!inputIsValid && <p className='error-text'>Enter Your name !!!</p>}
             <div className="form-actions">
@@ -36,4 +113,4 @@ const SimpleInput = (props) => {
     );
 };
 
-export default SimpleInput;
+export default SimpleInput; */
