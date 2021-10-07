@@ -7,10 +7,14 @@ const SimpleInput = (props) => {
     const [inputNameTuched, setInputNameTuched] = useState(false);
     const [inputEmailTuched, setInputEmailTuched] = useState(false);
 
-    const enteredNameIsValid = enteredNameInput.trim() !== '';
-    const enteredEmailIsValid = enteredEmailInput.trim() !== '';
+    const regName = /^[A-žÀ-ÿš ]+$/;
+    const regEmail = /^[a-z]+[0-9a-zA-Z_.]*@[a-z_]+.[a-z]+$/;
+
+    const enteredNameIsValid = enteredNameInput.trim() !== '' && regName.test(enteredNameInput);
+    const enteredEmailIsValid = enteredEmailInput.trim() !== '' && regEmail.test(enteredEmailInput);
     const nameInputIsValid = !enteredNameIsValid && inputNameTuched;
     const emailInputIsValid = !enteredEmailIsValid && inputEmailTuched;
+    
 
     let formIsValid = false;
 
