@@ -2,6 +2,7 @@ import {useState} from 'react'
 
 const useInput = () => {
 const [inputValue, setInputValue] = useState();
+const [inputThached, setInputThched] = useState(false);
 
 
 
