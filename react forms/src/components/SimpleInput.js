@@ -3,14 +3,14 @@ import useInput from '../hooks/use-input';
 
 const SimpleInput = (props) => {
 
-    // const regName = /^[A-žÀ-ÿš ]+$/;
+    const regName = /^[A-žÀ-ÿš ]+$/;
     const regEmail = /^[a-z]+[0-9a-zA-Z_.]*@[a-z_]+.[a-z]+$/;
     const { value: enteredName,
         hasError: nameInputError,
         isValid: nameInputIsValid,
         inputHandler: nameInputHandler,
         reset: nameInputReset,
-        inputBlurHandler: nameInputBlurHandler } = useInput(value => value.trim() !== '');
+        inputBlurHandler: nameInputBlurHandler } = useInput(value => value.trim() !== '' && regName.test(value));
     const { value: enteredEmail,
         hasError: emailInputError,
         isValid: emailInputIsValid,
