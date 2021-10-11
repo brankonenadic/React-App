@@ -50,7 +50,7 @@ const BasicForm = (props) => {
     resetEmailInput();
   }
   const nameInputClass = !nameInpuHasError ? 'form-control' : 'form-control invalid';
-  
+
   const lastNameInputClass = !lastNameInpuHasError ? 'form-control' : 'form-control invalid';
 
   const emailInputClass = !emailInpuHasError ? 'form-control' : 'form-control invalid';
@@ -61,19 +61,19 @@ const BasicForm = (props) => {
         <div className={nameInputClass}>
           <label htmlFor='name'>First Name</label>
           <input type='text' id='name' onBlur={nameInputBlur} onChange={nameHandler} value={nameValue} />
-          {nameInpuHasError && <p className={['error-text']}><small>Enter Your Name</small></p>}
+          {nameInpuHasError && <p className="error-text"><small>Enter Your Name</small></p>}
         </div>
 
         <div className={lastNameInputClass}>
           <label htmlFor='lastName'>Last Name</label>
           <input type='text' id='lastName' onBlur={lastNameInputBlur} onChange={lastNameHandler} value={lastNameValue} />
-          {lastNameInpuHasError && <p className={['error-text']}><small>Enter Your Last name</small></p>}
+          {lastNameInpuHasError && <p className="error-text"><small>Enter Your Last name</small></p>}
         </div>
       </div>
       <div className={emailInputClass}>
         <label htmlFor='emaič'>E-Mail Address</label>
         <input type='email' id='email' onBlur={emailInputBlur} onChange={emailHandler} value={emailValue} />
-        {emailInpuHasError && <p className={['error-text']}><small>Enter Valid Email</small></p>}
+        {emailInpuHasError && <p className="error-text"><small>Enter Valid Email</small></p>}
       </div>
       <div className='form-actions'>
         <button disabled={!formIsValid}>Submit</button>
