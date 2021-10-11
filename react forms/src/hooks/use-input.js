@@ -1,22 +1,31 @@
-import {useState} from 'react'
+import { useState } from 'react'
 
-const useInput = () => {
-const [inputValue, setInputValue] = useState();
-const [inputThached, setInputThched] = useState(false);
+const useInput = (validateValue) => {
+    const [inputValue, setInputValue] = useState('');
+    const [inputThached, setInputThched] = useState(false);
 
-const inputHandler = (e) => {
-    setInputValue(e.target.value);
-    
-}
-const inputBlurHandler = () => {
-    setInputNameTuched(true);
-}
+    const inputIsValid = validateValue(inputValue);
+    const hasError = !inputIsValid && inputThached;
 
-    return (
-        <div>
-            
-        </div>
-    )
+    const inputHandler = (e) => {
+        setInputValue(e.target.value);
+
+    }
+    const inputBlurHandler = () => {
+        setInputThched(true);
+    }
+    const reset = () => {
+        setInputValue('');
+        setInputThched(false);
+    }
+    return {
+        value: inputValue,
+        hasError,
+        isValid: inputIsValid,
+        inputHandler,
+        inputBlurHandler,
+        reset
+    };
 }
 
 export default useInput
