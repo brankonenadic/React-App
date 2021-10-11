@@ -10,12 +10,9 @@ const useNewInput = (validateValue) => {
 
     const inputHandler = (e) => {
         setInputValue(e.target.value);
-
     }
     const inputBlur = () => {
-
         setInputThached(true);
-
     }
     const ressetInput = () => {
         setInputValue('');
