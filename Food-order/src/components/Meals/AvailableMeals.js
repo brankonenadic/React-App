@@ -6,25 +6,54 @@ import classes from './AvailableMeals.module.css';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    const fetchMeals = async () =>{
-     const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/meals.json');
-     const responseData = await response.json();
-     const loadedMeals = [];
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorState, setErrorState] = useState();
 
-     for (const key in responseData) {
+  useEffect(() => {
+    const fetchMeals = async () => {
+
+      const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/meals.json');
+
+      if (!response.ok) {
+        throw new Error('Something went wromg !!!');
+      }
+
+      const responseData = await response.json();
+      const loadedMeals = [];
+
+      for (const key in responseData) {
         loadedMeals.push({
           id: key,
           name: responseData[key].name,
           description: responseData[key].description,
           price: responseData[key].price
         });
-     }
-     setMeals(loadedMeals);
+      }
+      setMeals(loadedMeals);
+      setIsLoading(false);
     };
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      setErrorState(error.message);
+
+    });
+
   }, []);
+
+  if (errorState) {
+    return (
+      <section className={classes.mealsError}>
+        <p>{errorState}</p>
+      </section>
+    );
+  }
+  if (isLoading) {
+    return (
+      <section className={classes.mealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
