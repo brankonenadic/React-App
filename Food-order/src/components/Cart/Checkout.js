@@ -28,7 +28,7 @@ const Checkout = (props) => {
 
     const nameIsValid = !isEmpty(enteredName);
     const streetIsValid = !isEmpty(enteredStreet);
-    const postalIsValid = !isFiveChars(enteredPostal);
+    const postalIsValid = isFiveChars(enteredPostal);
     const cityIsValid = !isEmpty(enteredCity);
 
     setInputValiditi({
@@ -47,6 +47,9 @@ const Checkout = (props) => {
 
   };
   const invalidNameClass = `${classes.control} ${inputValiditi.name ? '' : classes.invalid }`;
+  const invalidStreetClass = `${classes.control} ${inputValiditi.street ? '' : classes.invalid }`;
+  const invalidPostalClass = `${classes.control} ${inputValiditi.postal ? '' : classes.invalid }`;
+  const invalidCityClass = `${classes.control} ${inputValiditi.city ? '' : classes.invalid }`;
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={invalidNameClass}>
@@ -54,17 +57,17 @@ const Checkout = (props) => {
         <input type='text' id='name' ref={nameInputRef} />
         {!inputValiditi.name && <p>Enter valid name !</p>}
       </div>
-      <div className={classes.control}>
+      <div className={invalidStreetClass}>
         <label htmlFor='street'>Street</label>
         <input type='text' id='street' ref={streetInputRef} />
         {!inputValiditi.street && <p>Enter valid street !</p>}
       </div>
-      <div className={classes.control}>
+      <div className={invalidPostalClass}>
         <label htmlFor='postal'>Postal Code</label>
         <input type='text' id='postal' ref={postalInputRef} />
         {!inputValiditi.postal && <p>Enter valid postal code !</p>}
       </div>
-      <div className={classes.control}>
+      <div className={invalidCityClass}>
         <label htmlFor='city'>City</label>
         <input type='text' id='city' ref={cityInputRef} />
         {!inputValiditi.city && <p>Enter valid city !</p>}
