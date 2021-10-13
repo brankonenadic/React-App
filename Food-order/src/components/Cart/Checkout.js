@@ -1,4 +1,3 @@
-import { isValidElement } from 'react';
 import { useRef } from 'react'
 import classes from './Checkout.module.css';
 
@@ -21,9 +20,13 @@ const Checkout = (props) => {
     const enteredCity = cityInputRef.current.value;
 
     const nameIsValid = !isEmpty(enteredName);
-    const streeatIsValid = !isEmpty(enteredStreet);
+    const streetIsValid = !isEmpty(enteredStreet);
     const postalIsValid = !isFiveChars(enteredPostal);
-    const cityIsValid = !isValidElement(enteredCity);
+    const cityIsValid = !isEmpty(enteredCity);
+
+    const formIsValid = nameIsValid && streetIsValid && postalIsValid && cityIsValid;
+
+
 
   };
 
