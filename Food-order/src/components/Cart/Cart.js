@@ -69,9 +69,13 @@ const Cart = (props) => {
     {!orderState && modalActions}
   </React.Fragment>;
   const isSubmitingModalContent = <p>Sending order data ...</p>;
+  const didSubmitModalContent = <p>Saccessfully send the order !</p>;
+
   return (
     <Modal onClose={props.onClose}>
-      {cartModalContent}
+      {!isSubmit && cartModalContent}
+      {isSubmit && isSubmitingModalContent}
+      {didSubmit && didSubmitModalContent}
     </Modal>
   );
 };
