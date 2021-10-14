@@ -25,7 +25,14 @@ const Cart = (props) => {
     setOrderState(true);
   }
  const submitOrderHandler = (userDAta) => {
+  fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+    method: 'POST',
+    body: JSON.stringify({
+      user: userDAta,
+      orderItems: cartCtx.items
+    })
 
+  });
  }
 
   const cartItems = (
