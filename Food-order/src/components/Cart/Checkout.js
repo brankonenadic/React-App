@@ -2,8 +2,9 @@ import { useRef, useState } from 'react'
 import classes from './Checkout.module.css';
 
 
-const isEmpty = value => value.trim() === '';
-const isFiveChars = value => value.trim().length === 5;
+const isEmpty = (value) => value.trim() === '';
+const isFiveChars = (value) => value.trim().length === 5;
+
 
 const Checkout = (props) => {
   const [inputValiditi, setInputValiditi] = useState({
@@ -34,16 +35,18 @@ const Checkout = (props) => {
     setInputValiditi({
       name: nameIsValid,
       street: streetIsValid,
-      postal: enteredPostal,
-      city: enteredCity
+      postal: postalIsValid,
+      city: cityIsValid
     });
 
 
     const formIsValid = nameIsValid && streetIsValid && postalIsValid && cityIsValid;
 
-    if (formIsValid) {
-
+    if (!formIsValid) {
+      return;
     }
+
+    props.onConfirm();
 
   };
   const invalidNameClass = `${classes.control} ${inputValiditi.name ? '' : classes.invalid }`;

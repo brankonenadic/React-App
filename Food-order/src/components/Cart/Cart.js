@@ -22,10 +22,11 @@ const Cart = (props) => {
     cartCtx.addItem(item);
   };
   const orderHandler = () => {
-
     setOrderState(true);
   }
- 
+ const submitOrderHandler = (userDAta) => {
+
+ }
 
   const cartItems = (
     <ul className={classes['cart-items']}>
@@ -55,7 +56,7 @@ const Cart = (props) => {
         <span>Total Amount</span>
         <span>{totalAmount}</span>
       </div>
-      {orderState && <Checkout onCancel={props.onClose} />}
+      {orderState && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose} />}
       {!orderState && modalActions}
     </Modal>
   );
