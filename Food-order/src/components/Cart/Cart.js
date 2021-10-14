@@ -8,7 +8,8 @@ import Checkout from './Checkout';
 
 const Cart = (props) => {
   const [orderState, setOrderState] = useState(false);
-
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const cartCtx = useContext(CartContext);
 
   const totalAmount = `$${cartCtx.totalAmount.toFixed(2)}`;
@@ -24,16 +25,19 @@ const Cart = (props) => {
   const orderHandler = () => {
     setOrderState(true);
   }
- const submitOrderHandler = (userDAta) => {
-  fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
-    method: 'POST',
-    body: JSON.stringify({
-      user: userDAta,
-      orderItems: cartCtx.items
-    })
+  const submitOrderHandler = async (userDAta) => {
+    setIsSubmit(true);
+    await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/orders.json', {
+      method: 'POST',
+      body: JSON.stringify({
+        user: userDAta,
+        orderItems: cartCtx.items
+      })
 
-  });
- }
+    });
+    setIsSubmit(false);
+    setDidSubmit(true);
+  };
 
   const cartItems = (
     <ul className={classes['cart-items']}>

@@ -54,10 +54,10 @@ const Checkout = (props) => {
     });
 
   };
-  const invalidNameClass = `${classes.control} ${inputValiditi.name ? '' : classes.invalid }`;
-  const invalidStreetClass = `${classes.control} ${inputValiditi.street ? '' : classes.invalid }`;
-  const invalidPostalClass = `${classes.control} ${inputValiditi.postal ? '' : classes.invalid }`;
-  const invalidCityClass = `${classes.control} ${inputValiditi.city ? '' : classes.invalid }`;
+  const invalidNameClass = `${classes.control} ${inputValiditi.name ? '' : classes.invalid}`;
+  const invalidStreetClass = `${classes.control} ${inputValiditi.street ? '' : classes.invalid}`;
+  const invalidPostalClass = `${classes.control} ${inputValiditi.postal ? '' : classes.invalid}`;
+  const invalidCityClass = `${classes.control} ${inputValiditi.city ? '' : classes.invalid}`;
   return (
     <form className={classes.form} onSubmit={confirmHandler}>
       <div className={invalidNameClass}>
