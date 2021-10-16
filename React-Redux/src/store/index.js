@@ -17,7 +17,7 @@ createSlice({
       state.counter = state.counter + action.amount;
     },
     toggle(state) {
-      stete.counter = !state.counter;
+      state.counter = !state.counter;
     }
   }
 });
