@@ -1,23 +1,22 @@
-
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
-const currentState = {counter: 0, showCounter: true};
+const initialState = { counter: 0, showCounter: true };
 
 const counterSlice = createSlice({
   name: 'counter',
-  currentState,
-  reducers:{
+  initialState,
+  reducers: {
     increment(state) {
       state.counter++;
     },
-    incrementes(state) {
+    decrement(state) {
       state.counter--;
     },
-    decrement(state, action) {
+    increase(state, action) {
       state.counter = state.counter + action.payload;
     },
-    toggle(state) {
-      state.counter = !state.counter;
+    toggleCounter(state) {
+      state.showCounter = !state.showCounter;
     }
   }
 });
@@ -25,7 +24,9 @@ const counterSlice = createSlice({
 const store = configureStore({
   reducer: counterSlice.reducer
 });
+
 export const counterActions = counterSlice.actions;
+
 export default store;
 
 /* import { createStore } from 'redux';
