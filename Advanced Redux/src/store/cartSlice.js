@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { isValidElement } from "react";
 
 const cartSlice = createSlice({
     name: 'cart',
