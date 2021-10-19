@@ -38,6 +38,19 @@ const cartSlice = createSlice({
         },
     }
 });
+
+export const fetchCartDate = () => {
+    return (dispatch) => {
+        const fetchData = async () => {
+           const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/cart.json');
+           if (!response.ok) {
+            throw new Error('Fetch data falied"');
+           }
+           const date = await response.json();
+        };
+    };
+};
+
 export const sendCrtData = (cart) => {
     return async (dispatch) => {
         dispatch(uiActions.showNotification({
