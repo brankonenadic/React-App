@@ -17,16 +17,9 @@ function App() {
   useEffect(() => {
     const cartDaata = async () => {
      
-      const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/cart.json', { method: 'PUT', body: JSON.stringify(cart) });
-      if(!response.ok) {
-        throw new Error('Sending cart data failed!');
-      }
+   
 
-      dispatch(uiActions.showNotification({
-        status: 'success',
-        title: 'SUccess',
-        message: 'Sent cart data successfully!'
-      }));
+     
 
     };
     if (initial) {
