@@ -8,6 +8,10 @@ const cartSlice = createSlice({
         totalQuantity: 0,
     },
     reducers: {
+        replaceCart(state, action) {
+            state.totalQuantity = action.payload.totalQuantity;
+            state.items = action.payload.items;
+        },
         addItemToCart(state, action) {
             const newItem = action.payload;
             const existingItem = state.items.find(item => item.id === newItem.id);
@@ -40,14 +44,25 @@ const cartSlice = createSlice({
 });
 
 export const fetchCartDate = () => {
-    return (dispatch) => {
+    return async (dispatch) => {
         const fetchData = async () => {
-           const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/cart.json');
-           if (!response.ok) {
-            throw new Error('Fetch data falied"');
-           }
-           const date = await response.json();
+            const response = await fetch('https://food-order-3594b-default-rtdb.europe-west1.firebasedatabase.app/cart.json');
+            if (!response.ok) {
+                throw new Error('Fetch data falied"');
+            }
+            const data = await response.json();
+            return data;
         };
+        try {
+         const cartData = await fetchData();
+         dispatch();
+        } catch (error) {
+            dispatch(uiActions.showNotification({
+                status: 'error',
+                title: 'Error',
+                message: 'Fetching cart data failed!'
+            }));
+        }
     };
 };
 
