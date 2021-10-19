@@ -55,7 +55,7 @@ export const fetchCartDate = () => {
         };
         try {
          const cartData = await fetchData();
-         dispatch();
+         dispatch(cartActions.replaceCart(cartData));
         } catch (error) {
             dispatch(uiActions.showNotification({
                 status: 'error',
