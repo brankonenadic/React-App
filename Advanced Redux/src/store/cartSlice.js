@@ -38,7 +38,7 @@ const cartSlice = createSlice({
         },
     }
 });
-const sendCrtData = (cart) => {
+export const sendCrtData = (cart) => {
     return async (dispatch) => {
         dispatch(uiActions.showNotification({
             status: 'pending',
@@ -50,13 +50,24 @@ const sendCrtData = (cart) => {
             if (!response.ok) {
                 throw new Error('Sending cart data failed!');
             }
+        };
+
+        try {
+            await sendRequest();
+            dispatch(uiActions.showNotification({
+                status: 'success',
+                title: 'SUccess',
+                message: 'Sent cart data successfully!'
+            }));
+        } catch (error) {
+
+            dispatch(uiActions.showNotification({
+                status: 'error',
+                title: 'Error',
+                message: 'Sending cart data failed!'
+            }));
         }
-       
-        dispatch(uiActions.showNotification({
-            status: 'success',
-            title: 'SUccess',
-            message: 'Sent cart data successfully!'
-        }));
+
     };
 };
 

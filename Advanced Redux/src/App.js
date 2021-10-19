@@ -4,7 +4,7 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 import Notification from './components/UI/Notification';
-import {uiActions} from './store/uiSlice';
+import { sendCrtData } from './store/cartSlice';
 
 let initial = true;
 
@@ -15,33 +15,21 @@ function App() {
   const notification = useSelector(state => state.ui.notification);
 
   useEffect(() => {
-    const cartDaata = async () => {
-     
-   
 
-     
-
-    };
     if (initial) {
       initial = false;
       return;
     }
-    cartDaata().catch(error => {
-      dispatch(uiActions.showNotification({
-        status: 'error',
-        title: 'Error',
-        message: 'Sending cart data failed!'
-      }));
-    });
+    dispatch(sendCrtData(cart));
   }, [cart, dispatch]);
 
   return (
     <Fragment>
-     {notification &&  <Notification  status={notification.status} title={notification.title} message={notification.message} />}
-    <Layout>
-      {showCart && <Cart />}
-      <Products />
-    </Layout>
+      {notification && <Notification status={notification.status} title={notification.title} message={notification.message} />}
+      <Layout>
+        {showCart && <Cart />}
+        <Products />
+      </Layout>
     </Fragment>
   );
 }
