@@ -1,4 +1,5 @@
 import React from 'react'
+import QuoteList from '../components/quotes/QuoteList';
 
 const DUMMY_DATA = [
 {
@@ -19,9 +20,7 @@ const DUMMY_DATA = [
 ];
 const AllQuotes = () => {
     return (
-        <div>
-            <h1>All Quotes Page</h1>
-        </div>
+       <QuoteList quotes={DUMMY_DATA} />
     )
 }
 
