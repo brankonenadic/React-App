@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Route } from 'react-router-dom';
 
 const QuoteDetail = () => {
     const params = useParams();
@@ -7,6 +7,9 @@ const QuoteDetail = () => {
         <div>
             <h1>Quote Detail Page</h1>
             <p>{params.quoteId}</p>
+            <Route path="/quotes/:quoteId/comments">
+            <p>Comments</p>
+            </Route>
         </div>
     )
 }
