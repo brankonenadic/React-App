@@ -6,7 +6,7 @@ import classes from './QuoteList.module.css';
 const QuoteList = (props) => {
   const history = useHistory();
   const location = useLocation();
-  console.log(location);
+  const queryParams = new URLSearchParams(location.search);
   const sortHandler = () => {
     history.push('/quotes?sort=asc');
   };
