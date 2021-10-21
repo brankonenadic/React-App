@@ -1,6 +1,22 @@
 import React from 'react'
 
-const DUMMY_DTATA
+const DUMMY_DATA = [
+{
+    id: 'q1',
+    author: 'Jana',
+    text: 'Love lirning React !',
+},
+{
+    id: 'q2',
+    author: 'Selma',
+    text: 'Exercising is fun !',
+},
+{
+    id: 'q3',
+    author: 'Marija',
+    text: 'Time is for shopping !',
+}
+];
 const AllQuotes = () => {
     return (
         <div>
@@ -9,4 +25,4 @@ const AllQuotes = () => {
     )
 }
 
-export default AllQu
+export default AllQuotes
