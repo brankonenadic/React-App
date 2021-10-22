@@ -6,13 +6,19 @@ import { addComment } from '../../lib/api';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
-  const { sendRequest, status } = useHttp(addComment);
-  useEffect(() => {}, []);
+ 
+  const { sendRequest, status, error } = useHttp(addComment);
+  const {onAddComment} = props;
+  useEffect(() => {
+    if (status === 'completed' && !error) {
+      onAddComment();
+    }
+  }, [status, error, onAddComment]);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
     const enteredText = commentTextRef.current.value;
-    sendRequest({ tevt: enteredText });
+    sendRequest({ tevt: enteredText }, props.quoteId);
   };
 
   return (
