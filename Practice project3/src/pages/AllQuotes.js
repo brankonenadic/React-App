@@ -1,5 +1,7 @@
 import React from 'react'
 import QuoteList from '../components/quotes/QuoteList';
+import useHttp from '../hooks/use-http';
+import { getAllQuotes } from '../lib/api';
 
 const DUMMY_DATA = [
 {
