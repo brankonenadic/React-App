@@ -3,6 +3,8 @@ import { Fragment } from 'react';
 import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
 import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
+import useHttp from '../hooks/use-http';
+import {getSingleQuote} from '../lib/api';
 
 const DUMMY_DATA = [
     {
