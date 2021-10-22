@@ -29,7 +29,9 @@ useEffect(() => {
 if (status === 'pending') {
     return (<div className="centered"><LoadingSpinner /></div>);
 }
-
+if (error) {
+    return (<p className="centered focused">{error}</p>);
+}
     return (
        <QuoteList quotes={DUMMY_DATA} />
     )
