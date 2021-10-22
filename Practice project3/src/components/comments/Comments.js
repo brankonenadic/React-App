@@ -28,10 +28,12 @@ const Comments = () => {
     comments = <div className="centered"><LoadingSpinner /></div>;
   }
 
-  if (status === 'completed' && loadedComment) {
-    comments = <CommentsList />
+  if (status === 'completed' && (loadedComment && loadedComment.length > 0)) {
+    comments = <CommentsList comments={loadedComment} />;
   }
-
+  if (status === 'completed' && (!loadedComment && loadedComment.length === 0)) {
+    comments = <p className="centered">No comments added yet !</p>;
+  }
   return (
     <section className={classes.comments}>
       <h2>User Comments</h2>
