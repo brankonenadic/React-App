@@ -1,33 +1,22 @@
-import React from 'react'
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useParams, Route, Link, useRouteMatch } from 'react-router-dom';
 import Comments from '../components/comments/Comments';
 import HighlightedQuote from '../components/quotes/HighlightedQuote';
 import useHttp from '../hooks/use-http';
-import {getSingleQuote} from '../lib/api';
+import { getSingleQuote } from '../lib/api';
 
-const DUMMY_DATA = [
-    {
-        id: 'q1',
-        author: 'Jana',
-        text: 'Love lirning React !',
-    },
-    {
-        id: 'q2',
-        author: 'Selma',
-        text: 'Exercising is fun !',
-    },
-    {
-        id: 'q3',
-        author: 'Marija',
-        text: 'Time is for shopping !',
-    }
-];
+
 const QuoteDetail = () => {
-    const {} = useHttp(getSingleQuote, true);
+
     const match = useRouteMatch();
     const params = useParams();
-    const detail = DUMMY_DATA.find(quote => quote.id === params.quoteId);
+
+    const { sendRequest, status, data: loadedData, error } = useHttp(getSingleQuote, true);
+
+    useEffect(() => {
+        sendRequest();
+    }, [sendRequest]);
+
     if (!detail) {
         return <h2>No Quote find !!!</h2>
     }
