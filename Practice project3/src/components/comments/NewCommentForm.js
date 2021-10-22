@@ -18,7 +18,7 @@ const NewCommentForm = (props) => {
   const submitFormHandler = (event) => {
     event.preventDefault();
     const enteredText = commentTextRef.current.value;
-    sendRequest({ tevt: enteredText }, props.quoteId);
+    sendRequest({commentData: { text: enteredText }, quoteId: props.quoteId});
   };
 
   return (

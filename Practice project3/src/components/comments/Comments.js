@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './Comments.module.css';
@@ -20,9 +20,9 @@ const Comments = () => {
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
-  const addCommentsHandler = () => {
-
-  };
+  const addCommentsHandler = useCallback( () => {
+    sendRequest(quoteId);
+  }, [sendRequest, quoteId]);
   let comments;
   if (status === 'pending') {
     comments = <div className="centered"><LoadingSpinner /></div>;
@@ -31,7 +31,7 @@ const Comments = () => {
   if (status === 'completed' && (loadedComment && loadedComment.length > 0)) {
     comments = <CommentsList comments={loadedComment} />;
   }
-  if (status === 'completed' && (!loadedComment && loadedComment.length === 0)) {
+  if (status === 'completed' && (!loadedComment || loadedComment.length === 0)) {
     comments = <p className="centered">No comments added yet !</p>;
   }
   return (
