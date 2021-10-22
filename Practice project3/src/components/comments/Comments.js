@@ -1,27 +1,37 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import LoadingSpinner from '../UI/LoadingSpinner';
 import classes from './Comments.module.css';
 import NewCommentForm from './NewCommentForm';
 import useHttp from '../../hooks/use-http';
 import { getAllComments } from '../../lib/api';
+import CommentsList from './CommentsList';
 
 const Comments = () => {
   const [isAddingComment, setIsAddingComment] = useState(false);
   const { sendRequest, status, data: loadedComment } = useHttp(getAllComments);
   const params = useParams();
   const { quoteId } = params;
-  
+
   useEffect(() => {
     sendRequest(quoteId);
   }, [quoteId, sendRequest]);
-  
+
   const startAddCommentHandler = () => {
     setIsAddingComment(true);
   };
   const addCommentsHandler = () => {
 
   };
+  let comments;
+  if (status === 'pending') {
+    comments = <div className="centered"><LoadingSpinner /></div>;
+  }
+
+  if (status === 'completed' && loadedComment) {
+    comments = <CommentsList />
+  }
+
   return (
     <section className={classes.comments}>
       <h2>User Comments</h2>
@@ -31,7 +41,7 @@ const Comments = () => {
         </button>
       )}
       {isAddingComment && <NewCommentForm onAddComment={addCommentsHandler} quoteId={quoteId} />}
-      <p>Comments...</p>
+    {comments}
     </section>
   );
 };
