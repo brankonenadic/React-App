@@ -1,9 +1,12 @@
 import { useRef } from 'react';
 
 import classes from './NewCommentForm.module.css';
+import useHttp from '../../hooks/use-http';
+import { addComment } from '../../lib/api';
 
 const NewCommentForm = (props) => {
   const commentTextRef = useRef();
+ const {sendRequest, status} = useHttp(addComment);
 
   const submitFormHandler = (event) => {
     event.preventDefault();
