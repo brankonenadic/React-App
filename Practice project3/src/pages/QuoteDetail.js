@@ -24,6 +24,7 @@ const DUMMY_DATA = [
     }
 ];
 const QuoteDetail = () => {
+    const {} = useHttp(getSingleQuote, true);
     const match = useRouteMatch();
     const params = useParams();
     const detail = DUMMY_DATA.find(quote => quote.id === params.quoteId);
