@@ -10,14 +10,13 @@ const NewCommentForm = (props) => {
 
   const submitFormHandler = (event) => {
     event.preventDefault();
-
-    // optional: Could validate here
-
-    // send comment to server
+const enteredText = commentTextRef.current.value;
+ sendRequest({tevt: enteredText});
   };
 
   return (
     <form className={classes.form} onSubmit={submitFormHandler}>
+      {}
       <div className={classes.control} onSubmit={submitFormHandler}>
         <label htmlFor='comment'>Your Comment</label>
         <textarea id='comment' rows='5' ref={commentTextRef}></textarea>
@@ -29,4 +28,4 @@ const NewCommentForm = (props) => {
   );
 };
 
-export default NewCommentForm;
+export default NewComm
