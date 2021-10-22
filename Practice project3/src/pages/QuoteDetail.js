@@ -26,13 +26,13 @@ const QuoteDetail = () => {
         return (<p className="centered focused">{error}</p>);
     }
 
-    if (!detail) {
+    if (!loadedData.text) {
         return <h2>No Quote find !!!</h2>
     }
 
     return (
         <Fragment>
-            <HighlightedQuote text={detail.text} author={detail.author} />
+            <HighlightedQuote text={loadedData.text} author={loadedData.author} />
             <Route path={match.path} exact>
                 <div className="centered">
                     <Link className="btn--flat" to={`${match.url}/comments`}>Live comment</Link>
