@@ -22,6 +22,10 @@ const DUMMY_DATA = [
 ];
 const AllQuotes = () => {
     const {sendRequest , status, data: loadedData, error} = useHttp(getAllQuotes, true);
+useEffect(() => {
+    sendRequest();
+}, [sendRequest]);
+
     return (
        <QuoteList quotes={DUMMY_DATA} />
     )
