@@ -20,7 +20,9 @@ const AuthForm = () => {
       fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyA0mjJHyVSuaaMjG2ZcCP3TwlV1vQnjFuM', {
         method: 'POST',
         body: JSON.stringify({
-          
+          email: enteredEmail,
+          password: enteredPassword,
+          returnSecureToken: true
         })
       })
     }
