@@ -17,25 +17,31 @@ const AuthForm = () => {
     if (isLogin) {
 
     } else {
-      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyA0mjJHyVSuaaMjG2ZcCP3TwlV1vQnjFuM', {
+      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA_7gon5wLU-7yN6nQHEt8uejZOF6ApOXU', {
         method: 'POST',
         body: JSON.stringify({
           email: enteredEmail,
           password: enteredPassword,
-          returnSecureToken: true
+          returnSecureToken: true,
         }),
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         }
       }).then(res => {
         if (res.ok) {
 
         } else {
-          
+          return res.json().then(data => {
+            let errorMessage = 'Authentacion failed!'
+            if (data && data.error && data.error.message) {
+              errorMessage = data.error.message;
+            }
+            alert(errorMessage);
+          });
         }
       })
     }
-  
+
   };
   return (
     <section className={classes.auth} onSubmit={submitHandler}>
