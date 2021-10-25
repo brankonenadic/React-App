@@ -59,7 +59,8 @@ const AuthForm = () => {
           <input ref={passwordRef} type='password' id='password' autoComplete="off" required />
         </div>
         <div className={classes.actions}>
-          <button>{isLogin ? 'Login' : 'Create Account'}</button>
+          {!isLoading && <button>{isLogin ? 'Login' : 'Create Account'}</button>}
+          {isLoading && <p>Send request ...</p>}
           <button
             type='button'
             className={classes.toggle}
