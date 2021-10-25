@@ -19,11 +19,11 @@ const AuthForm = () => {
       <form>
         <div className={classes.control}>
           <label htmlFor='email'>Your Email</label>
-          <input type='email' id='email' required />
+          <input ref={emailRef} type='email' id='email' required />
         </div>
         <div className={classes.control}>
           <label htmlFor='password'>Your Password</label>
-          <input type='password' id='password' autoComplete="off" required />
+          <input ref={passwordRef} type='password' id='password' autoComplete="off" required />
         </div>
         <div className={classes.actions}>
           <button>{isLogin ? 'Login' : 'Create Account'}</button>
