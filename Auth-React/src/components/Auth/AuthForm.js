@@ -15,6 +15,7 @@ const AuthForm = () => {
     e.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+    setIsLoading(true);
     if (isLogin) {
 
     } else {
@@ -29,6 +30,7 @@ const AuthForm = () => {
           'Content-Type': 'application/json',
         }
       }).then(res => {
+        setIsLoading(false);
         if (res.ok) {
 
         } else {
