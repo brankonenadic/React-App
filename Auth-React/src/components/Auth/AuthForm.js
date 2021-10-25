@@ -12,6 +12,9 @@ const AuthForm = () => {
   };
   const submitHandler = (e) => {
     e.preventDefault();
+    const enteredEmail = emailRef.current.value;
+    const enteredPassword = passwordRef.current.value;
+  
   };
   return (
     <section className={classes.auth} onSubmit={submitHandler}>
