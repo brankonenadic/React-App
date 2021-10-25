@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 import classes from './AuthForm.module.css';
 
@@ -8,9 +8,11 @@ const AuthForm = () => {
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
-
+  const submitHandler = (e) => {
+    e.preventDefault();
+  };
   return (
-    <section className={classes.auth}>
+    <section className={classes.auth} onSubmit={submitHandler}>
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
       <form>
         <div className={classes.control}>
@@ -36,4 +38,4 @@ const AuthForm = () => {
   );
 };
 
-export default AuthForm;
+export default Auth
