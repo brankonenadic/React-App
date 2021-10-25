@@ -14,6 +14,16 @@ const AuthForm = () => {
     e.preventDefault();
     const enteredEmail = emailRef.current.value;
     const enteredPassword = passwordRef.current.value;
+    if (isLogin) {
+
+    } else {
+      fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=AIzaSyA0mjJHyVSuaaMjG2ZcCP3TwlV1vQnjFuM', {
+        method: 'POST',
+        body: JSON.stringify({
+          
+        })
+      })
+    }
   
   };
   return (
