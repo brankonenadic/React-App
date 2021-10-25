@@ -27,6 +27,12 @@ const AuthForm = () => {
         headers: {
           'Content-Type': 'application/json'
         }
+      }).then(res => {
+        if (res.ok) {
+
+        } else {
+          
+        }
       })
     }
   
