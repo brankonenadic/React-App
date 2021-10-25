@@ -7,6 +7,13 @@ const ProfileForm = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     const enteredNewPassword = newPassword.current.value;
+    fetch('https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyA_7gon5wLU-7yN6nQHEt8uejZOF6ApOXU', {
+      method: 'POST',
+      body: JSON.stringify(),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    });
   };
   return (
     <form className={classes.form} onSubmit={submitHandler}>
