@@ -3,6 +3,8 @@ import { useState, useRef } from 'react';
 import classes from './AuthForm.module.css';
 
 const AuthForm = () => {
+  const emailRef = useRef();
+  const passwordRef = useRef();
   const [isLogin, setIsLogin] = useState(true);
 
   const switchAuthModeHandler = () => {
@@ -38,4 +40,4 @@ const AuthForm = () => {
   );
 };
 
-export default Auth
+export default AuthForm;
