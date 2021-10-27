@@ -1,5 +1,5 @@
 import MeetupList from '../components/meetups/MeetupList';
-import Layout from '../components/layout/Layout';
+
 
 const DUMMY_LIST = [
     {
@@ -28,9 +28,7 @@ const DUMMY_LIST = [
 const HomePage = () => {
 
     return (
-        <Layout>
-            <MeetupList meetups={DUMMY_LIST} />
-        </Layout>
+        <MeetupList meetups={DUMMY_LIST} />
     );
 
 };
