@@ -1,12 +1,12 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import MeetupDetail from "../../components/meetups/MeetupDetail";
 
-const MeetupDetailPage = () => {
+const MeetupDetailPage = (props) => {
 
     return (
-        <MeetupDetail image='https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Vernazza_and_the_sea%2C_Cinque_Terre%2C_Italy.jpg/1024px-Vernazza_and_the_sea%2C_Cinque_Terre%2C_Italy.jpg'
-            title='Some meetup'
-            address='Some address  , SomeCity 323892' description='Some description...' />
+        <MeetupDetail image={props.meetupData.image}
+            title={props.meetupData.title}
+            address={props.meetupData.address} description={props.meetupData.description} />
     );
 };
 export async function getStaticPaths() {
@@ -32,16 +32,16 @@ export async function getStaticProps(context) {
 
     const meetupCollection = db.collection('meetup');
 
-    const selectedMeetup = await meetupCollection.findOne({ _id: meetupId });
+    const selectedMeetup = await meetupCollection.findOne({ _id: ObjectId(meetupId) });
     client.close();
     return {
         props: {
             meetupData: {
-                image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Vernazza_and_the_sea%2C_Cinque_Terre%2C_Italy.jpg/1024px-Vernazza_and_the_sea%2C_Cinque_Terre%2C_Italy.jpg',
-                id: meetupId,
-                title: 'Some meetup',
-                address: 'Some address  , SomeCity 323892',
-                description: 'Some description...'
+                id: selectedMeetup._id.toString(),
+                title: selectedMeetup.title,
+                image: selectedMeetup.image,
+                address: selectedMeetup.address,
+                description: selectedMeetup.description
             }
         }
     };
