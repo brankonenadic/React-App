@@ -10,6 +10,7 @@ const MeetupDetailPage = () => {
     );
 };
 export async function getStaticPaths() {
+
     return {
         fallback: false,
         paths: [
