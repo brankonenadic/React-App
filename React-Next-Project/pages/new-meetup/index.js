@@ -22,7 +22,7 @@ const NewMeetup = () => {
         <Fragment>
             <Head>
                 <title>Add a New Meetup</title>
-                <meta name="description" description="Add your own meetup" />
+                <meta name="description" content="Add your own meetup" />
             </Head>
             <NewMeetupForm onAddMeetup={onAddHandler} />
         </Fragment>

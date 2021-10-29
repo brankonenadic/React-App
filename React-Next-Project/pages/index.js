@@ -10,7 +10,7 @@ const HomePage = (props) => {
         <Fragment>
             <Head>
                 <title>React Meetups</title>
-                <mmeta name="description" description="Browse a huge list of highly active react meetups" />
+                <mmeta name="description" content="Browse a huge list of highly active react meetups" />
             </Head>
             <MeetupList meetups={props.meetups} />
         </Fragment>
