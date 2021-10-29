@@ -1,10 +1,12 @@
-import {useRouter} from 'next/router';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
+import { Fragment } from 'react';
 import NewMeetupForm from '../../components/meetups/NewMeetupForm';
 
 
 const NewMeetup = () => {
-   const router = useRouter();
-     const onAddHandler = async (enteredMeetupData) => {
+    const router = useRouter();
+    const onAddHandler = async (enteredMeetupData) => {
         const response = await fetch('/api/new-meetup', {
             method: 'POST',
             body: JSON.stringify(enteredMeetupData),
@@ -17,7 +19,13 @@ const NewMeetup = () => {
         router.push('/');
     };
     return (
-        <NewMeetupForm onAddMeetup={onAddHandler} />
+        <Fragment>
+            <Head>
+                <title>Add a New Meetup</title>
+                <meta name="description" description="Add your own meetup" />
+            </Head>
+            <NewMeetupForm onAddMeetup={onAddHandler} />
+        </Fragment>
     );
 };
 
