@@ -1,11 +1,19 @@
 import { MongoClient } from 'mongodb';
+import { Fragment } from 'react';
+import Head from 'next/head';
 import MeetupList from '../components/meetups/MeetupList';
 
 
 const HomePage = (props) => {
 
     return (
-        <MeetupList meetups={props.meetups} />
+        <Fragment>
+            <Head>
+                <title>React Meetups</title>
+                <mmeta name="description" description="Browse a huge list of highly active react meetups" />
+            </Head>
+            <MeetupList meetups={props.meetups} />
+        </Fragment>
     );
 
 };
@@ -18,16 +26,16 @@ export async function getStaticProps() {
     const meetupCollection = db.collection('meetup');
     const meetups = await meetupCollection.find().toArray();
     client.close();
-return {
-    props: {
-        meetups: meetups.map(meetup => ({
-            title: meetup.title,
-            image: meetup.image,
-            address: meetup.address,
-            id: meetup._id.toString(),
-        }))
-    },
-    revalidate: 1
-};
+    return {
+        props: {
+            meetups: meetups.map(meetup => ({
+                title: meetup.title,
+                image: meetup.image,
+                address: meetup.address,
+                id: meetup._id.toString(),
+            }))
+        },
+        revalidate: 1
+    };
 };
 export default HomePage;
