@@ -6,7 +6,7 @@ const backdrop = (props) => {
     const cssClasses = ['Backdrop' , props.show ? 'BackdropOpen' : 'BackdropClose' ];
 
     return (
-        <div className="Backdrop"></div>
+        <div className={cssClasses.join(' ')}></div>
     );
 };
 
